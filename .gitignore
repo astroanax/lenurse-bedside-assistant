@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Environment variables and secrets
+.env
+*.env
+google-credentials.json
+*.json.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Datasets (potentially large)
+datasets/
+data/
+
+# Temporary trajectory files (keep the organized ones in trajectories/ folder)
+trajectory_*.json
+
+# Logs
+*.log
+
+# Cache
+.cache/

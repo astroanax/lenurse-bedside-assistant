@@ -1,0 +1,19 @@
+flask
+opencv-python
+python-dotenv
+requests
+numpy
+langgraph
+langchain-core
+openai
+google-cloud-speech
+google-cloud-texttospeech
+google-cloud-translate
+pygame
+pyserial
+ultralytics  # YOLO11 for hazard detection
+lerobot  # LeRobot for VLA policy execution
+torch
+torchvision
+huggingface-hub
+transformers

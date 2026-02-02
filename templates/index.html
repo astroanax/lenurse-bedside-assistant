@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedside Healthcare Assistant Robot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <span class="logo">🏥</span>
+                <h1>BEDSIDE HEALTHCARE ASSISTANT</h1>
+                <span class="version">v1.0</span>
+            </div>
+            <div class="header-right">
+                <!-- Settings Controls -->
+                <div class="settings-controls">
+                    <button class="btn btn-mini btn-setting" id="btnDarkMode" title="Toggle Dark Mode">
+                        <span class="setting-icon">☀</span>
+                    </button>
+                    <select class="select-lang" id="selectLanguage" title="Select Language">
+                        <option value="en">English</option>
+                        <option value="ml">മലയാളം</option>
+                    </select>
+                </div>
+                <div class="status-indicator" id="systemStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">INITIALIZING</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Left Panel - JARVIS & Camera -->
+            <div class="panel-left">
+                <!-- JARVIS Chat Interface -->
+                <section class="section section-jarvis">
+                    <div class="section-header">
+                        <span class="section-icon">🤖</span>
+                        <span class="section-title">VOICE ASSISTANT</span>
+                        <button class="btn btn-mini" id="btnClearChat">CLEAR</button>
+                    </div>
+                    <div class="jarvis-container">
+                        <div class="jarvis-messages" id="jarvisMessages">
+                            <div class="jarvis-message assistant">
+                                <span class="message-sender">ASSISTANT</span>
+                                <span class="message-content">Hello! I'm your bedside healthcare assistant. I can help you with water, fruits, lights, medicine, and more. Just ask!</span>
+                            </div>
+                        </div>
+                        <div class="jarvis-input-container">
+                            <input type="text" id="jarvisInput" class="jarvis-text-input" placeholder="Ask for help..." autocomplete="off">
+                            <button class="btn btn-voice" id="btnJarvisVoice" title="Hold to speak">
+                                <span class="voice-icon">🎤</span>
+                            </button>
+                            <button class="btn btn-send" id="btnJarvisSend">SEND</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Camera Feed -->
+                <section class="section section-camera">
+                    <div class="section-header">
+                        <span class="section-icon">📷</span>
+                        <span class="section-title">CAMERA VIEW</span>
+                        <div class="camera-controls">
+                            <label class="camera-label">Device ID:</label>
+                            <input type="number" id="cameraInput" value="0" min="0" max="10" class="camera-input" title="Camera device number (e.g., 0 for /dev/video0)">
+                            <button class="btn btn-mini" id="btnCameraConnect" title="Connect to selected camera device">CONNECT</button>
+                        </div>
+                    </div>
+                    <div class="camera-container">
+                        <div class="camera-frame" id="cameraFrame">
+                            <img id="videoFeed" src="/video_feed" alt="Camera View">
+                        </div>
+                        <div class="camera-info">
+                            <span id="feedStatus">LIVE</span>
+                            <span id="cameraStatus">Device: --</span>
+                        </div>
+                    </div>
+                    <div class="camera-help">
+                        <p><strong>How to select camera:</strong></p>
+                        <ol>
+                            <li>Enter device number (0, 2, 4, etc.)</li>
+                            <li>Click CONNECT to switch camera</li>
+                            <li>Common: 0 = /dev/video0, 2 = /dev/video2</li>
+                        </ol>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Panel - Tasks & Logs -->
+            <div class="panel-right">
+                <!-- Quick Tasks -->
+                <section class="section section-tasks">
+                    <div class="section-header">
+                        <span class="section-icon">⚡</span>
+                        <span class="section-title">QUICK TASKS</span>
+                    </div>
+                    <div class="tasks-grid">
+                        <button class="task-btn" data-task="water_bottle">
+                            <span class="task-icon">💧</span>
+                            <span class="task-label">Water Bottle</span>
+                        </button>
+                        <button class="task-btn" data-task="fruit">
+                            <span class="task-icon">🍎</span>
+                            <span class="task-label">Feed Fruit</span>
+                        </button>
+                        <button class="task-btn" data-task="light">
+                            <span class="task-icon">💡</span>
+                            <span class="task-label">Toggle Light</span>
+                        </button>
+                        <button class="task-btn" data-task="medicine">
+                            <span class="task-icon">💊</span>
+                            <span class="task-label">Medicine</span>
+                        </button>
+                        <button class="task-btn" data-task="phone">
+                            <span class="task-icon">📱</span>
+                            <span class="task-label">Hand Phone</span>
+                        </button>
+                        <button class="task-btn" data-task="custom">
+                            <span class="task-icon">🤝</span>
+                            <span class="task-label">Custom Task</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Family Contacts -->
+                <section class="section section-family">
+                    <div class="section-header">
+                        <span class="section-icon">👨‍👩‍👧</span>
+                        <span class="section-title">FAMILY CONTACTS</span>
+                    </div>
+                    <div class="family-grid">
+                        <button class="family-btn" id="btnCallMom">
+                            <span class="family-icon">👩</span>
+                            <span class="family-label">Call Mom</span>
+                        </button>
+                        <button class="family-btn" id="btnCallDad">
+                            <span class="family-icon">👨</span>
+                            <span class="family-label">Call Dad</span>
+                        </button>
+                    </div>
+                    <div class="family-info">
+                        <p class="info-text">Quick access to call family members</p>
+                    </div>
+                </section>
+
+                <!-- Hazard Detection Alert -->
+                <div id="hazardAlert" class="hazard-alert" style="display:none;">
+                    <div class="hazard-content">
+                        <div class="hazard-icon">🚨</div>
+                        <div class="hazard-message">
+                            <h3>EMERGENCY ALERT</h3>
+                            <p id="hazardType">Hazard Detected</p>
+                            <p id="hazardDescription"></p>
+                        </div>
+                        <button class="btn btn-hazard" id="btnDismissHazard">DISMISS</button>
+                    </div>
+                </div>
+
+                <!-- Robot Status -->
+                <section class="section section-status">
+                    <div class="section-header">
+                        <span class="section-icon">🦾</span>
+                        <span class="section-title">ROBOT STATUS</span>
+                        <button class="btn btn-mini" id="btnRobotReset">RESET</button>
+                    </div>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span class="status-label">State:</span>
+                            <span class="status-value" id="robotState">IDLE</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Current Task:</span>
+                            <span class="status-value" id="robotTask">None</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Camera:</span>
+                            <span class="status-value" id="cameraDevice">Not Connected</span>
+                        </div>
+                    </div>
+                    <div class="robot-controls">
+                        <button class="btn btn-secondary" id="btnHome">HOME POSITION</button>
+                        <button class="btn btn-secondary" id="btnEmergencyStop">🛑 EMERGENCY STOP</button>
+                    </div>
+                </section>
+
+                <!-- Trajectory Controls -->
+                <section class="section section-trajectories">
+                    <div class="section-header">
+                        <span class="section-icon">🎯</span>
+                        <span class="section-title">TRAJECTORIES</span>
+                        <button class="btn btn-mini" id="btnRefreshTrajectories">REFRESH</button>
+                    </div>
+                    <div class="trajectories-list" id="trajectoriesList">
+                        <p class="info-text">Loading trajectories...</p>
+                    </div>
+                    <div class="trajectory-controls">
+                        <button class="btn btn-secondary" id="btnStopTrajectory" disabled>STOP</button>
+                        <input type="file" id="fileUploadTrajectory" accept=".json" style="display:none;">
+                        <button class="btn btn-secondary" id="btnUploadTrajectory">UPLOAD</button>
+                    </div>
+                </section>
+
+                <!-- System Log -->
+                <section class="section section-log">
+                    <div class="section-header">
+                        <span class="section-icon">📋</span>
+                        <span class="section-title">SYSTEM LOG</span>
+                        <button class="btn btn-mini" id="btnClearLog">CLEAR</button>
+                    </div>
+                    <div class="log-container" id="logContainer">
+                        <div class="log-entry info">
+                            <span class="log-time">00:00:00</span>
+                            <span class="log-message">System initialized</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span>Bedside Healthcare Assistant Robot</span>
+            <span>•</span>
+            <span>Voice-Controlled Assistance</span>
+            <span>•</span>
+            <span id="footerTime">00:00:00</span>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
