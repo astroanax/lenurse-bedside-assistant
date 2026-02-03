@@ -14,7 +14,7 @@ This solution addresses critical needs in healthcare and elderly care, particula
 
 ## Hardware Lineup
 
-- **Arduino UNO Q** - Main controller with integrated vision capabilities for VLA model inference
+- **Arduino UNO Q** - Main controller with integrated vision capabilities for YOLO11 and proxying VLA model inference
 - **Integrated Camera** - Real-time visual perception for the Vision-Language-Action model
 - **SO-101 5 DOF Robotic Arm** - High-precision robotic manipulator with ST servo motors
 - **Modulino Sensors** (if applicable) - Environmental monitoring and safety feedback
@@ -33,13 +33,16 @@ The system provides multiple interaction modalities:
   
 - **Voice Interface** - Natural language command processing powered by LLM agents for truly conversational, hands-free operation
 
-- **Visual Feedback** - Real-time hazard detection alerts and status indicators
+- **Visual Feedback** - Real-time hazard detection alerts and status indicators via YOLO
 
 - **Physical Feedback** - Robotic arm movements for assistive manipulation tasks
 
 ## The AI Model
 
-The system employs a sophisticated multi-modal AI architecture powered by cutting-edge Vision-Language-Action models:
+The system employs a sophisticated multi-modal AI architecture powered by cutting-edge models:
+### YOLO11
+This is the main computer model that runs on the Uno Q, exploiting the capabilities of the edge, and preserving privacy in a healthcare environment
+
 
 ### Vision-Language-Action (VLA) Model - pi0.5
 
