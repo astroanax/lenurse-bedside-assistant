@@ -41,7 +41,7 @@ The system provides multiple interaction modalities:
 
 The system employs a sophisticated multi-modal AI architecture powered by cutting-edge models:
 ### YOLO11
-This is the main computer model that runs on the Uno Q, exploiting the capabilities of the edge, and preserving privacy in a healthcare environment
+This is the main computer vision model that runs on the Uno Q, exploiting the capabilities of the edge, and preserving privacy in a healthcare environment
 
 
 ### Vision-Language-Action (VLA) Model - pi0.5
